@@ -2,59 +2,73 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>بطاقة هدية</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بطاقة ليزا الراقية</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri&family=Aref+Ruqaa&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&display=swap');
 
-        /* التمركز في نصف الشاشة */
+        /* إعدادات الخلفية والتمركز */
         body {
-            background-color: #fdfaf1;
+            background-color: #fdfaf1; 
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            perspective: 1000px;
+            perspective: 1500px;
             font-family: 'Amiri', serif;
         }
 
-        /* حاوية البطاقة */
-        .card-container {
+        #flip-trigger { display: none; }
+
+        /* الحاوية الأساسية للبطاقة */
+        .card {
             width: 320px;
-            height: 250px;
+            height: 220px;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.6s ease;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
         }
 
-        /* الكلاس الذي يقوم بالقلب */
-        .is-flipped {
+        /* قياسات الكمبيوتر */
+        @media (min-width: 600px) {
+            .card {
+                width: 480px; 
+                height: 250px;
+            }
+            .shatr { font-size: 20px !important; }
+            .back-phrase { font-size: 34px !important; }
+        }
+
+        /* حركة القلب */
+        #flip-trigger:checked + .card {
             transform: rotateY(180deg);
         }
 
-        .card-face {
+        /* تصميم أوجه البطاقة */
+        .face {
             position: absolute;
             width: 100%;
             height: 100%;
+            -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            -webkit-backface-visibility: hidden; /* للأيفون */
-            border-radius: 12px;
-            background-color: #fefcf5;
+            border-radius: 15px;
+            background-color: #fefcf5; /* أبيض مصفر عاجي */
             border: 1px solid #e8e2d2;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             display: flex;
-            padding: 10px;
+            padding: 15px;
             box-sizing: border-box;
         }
 
-        .card-back {
+        .back {
             transform: rotateY(180deg);
             background-color: #fcf9ee;
         }
 
-        .inner-border {
+        /* الإطار الداخلي الذهبي */
+        .inner {
             border: 1px solid #d4af37;
             width: 100%;
             height: 100%;
@@ -63,50 +77,74 @@
             justify-content: center;
             align-items: center;
             border-radius: 10px;
+            position: relative;
         }
 
-        .shatr { color: #4a4433; font-size: 16px; width: 100%; line-height: 1.6; }
-        .shatr-1 { text-align: right; padding-right: 15px; }
-        .shatr-2 { text-align: left; padding-left: 15px; font-style: italic; }
+        /* تنسيق النصوص */
+        .shatr { 
+            color: #4a4433; 
+            font-size: 17px; 
+            width: 100%; 
+            line-height: 1.6; 
+        }
+        .s1 { text-align: right; padding-right: 25px; }
+        .s2 { text-align: left; padding-left: 25px; font-style: italic; }
         
-        .divider { width: 40px; height: 1px; background: #d4af37; margin: 8px auto; opacity: 0.5; }
-        .ornament { color: #d4af37; font-size: 18px; }
-        
-        h2 { font-family: 'Aref Ruqaa', serif; color: #d4af37; font-size: 24px; margin: 0; }
-        p { color: #8c846d; font-size: 14px; margin-top: 5px; }
+        .line { 
+            width: 50px; 
+            height: 1px; 
+            background: #d4af37; 
+            margin: 12px auto; 
+            opacity: 0.5;
+        }
+
+        /* عبارة الوجه الثاني */
+        .back-phrase {
+            font-family: 'Aref Ruqaa', serif;
+            color: #d4af37;
+            font-size: 26px;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* عبارة التنبيه في الوجه الأمامي */
+        .hint-text {
+            position: absolute;
+            bottom: 5px;
+            font-size: 12px;
+            color: #b5ad96;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
 
-    <div class="card-container" id="card">
-        <div class="card-face card-front">
-            <div class="inner-border">
-                <div class="ornament">❖</div>
-                <div class="shatr shatr-1">يا فاتِناً بالجَمالِ بَصَري قد مَلَكْ</div>
-                <div class="shatr shatr-2">هل أنتِ من حواءَ وآدمَ أم مَلَكْ؟</div>
-                <div class="divider"></div>
-                <div class="shatr shatr-1">عيني إنْ نَظَرَتْ لِحُسْنِكِ سَبَّحَتْ</div>
-                <div class="shatr shatr-2">سبحانَ من خلقَ الجَمالَ وجَمَّلكْ</div>
-                <div class="ornament">❖</div>
+    <label for="flip-trigger">
+        <input type="checkbox" id="flip-trigger">
+        <div class="card">
+            
+            <div class="face front">
+                <div class="inner">
+                    <div class="shatr s1">يا فاتِناً بالجَمالِ بَصَري قد مَلَكْ</div>
+                    <div class="shatr s2">هل أنتِ من حواءَ وآدمَ أم مَلَكْ؟</div>
+                    <div class="line"></div>
+                    <div class="shatr s1">عيني إنْ نَظَرَتْ لِحُسْنِكِ سَبَّحَتْ</div>
+                    <div class="shatr s2">سبحانَ من خلقَ الجَمالَ وجَمَّلكْ</div>
+                    
+                    <div class="hint-text">اضغطي على البطاقه</div>
+                </div>
             </div>
-        </div>
 
-        <div class="card-face card-back">
-            <div class="inner-border">
-                <h2>دمتِ بخير</h2>
-                <div class="divider"></div>
-                <p>إلى من أهدت للجمال معنىً آخر..</p>
+            <div class="face back">
+                <div class="inner">
+                    <p class="back-phrase">شكراً لأنكِ ليزا...</p>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <script>
-        // الكود المختصر جداً للقلب لضمان التوافق
-        var card = document.getElementById('card');
-        card.onclick = function() {
-            card.classList.toggle('is-flipped');
-        };
-    </script>
+        </div>
+    </label>
 
 </body>
 </html>
