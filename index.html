@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>بطاقة هدية</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri&family=Aref+Ruqaa&display=swap');
+
+        /* التمركز في نصف الشاشة */
+        body {
+            background-color: #fdfaf1;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            perspective: 1000px;
+            font-family: 'Amiri', serif;
+        }
+
+        /* حاوية البطاقة */
+        .card-container {
+            width: 320px;
+            height: 250px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+            cursor: pointer;
+        }
+
+        /* الكلاس الذي يقوم بالقلب */
+        .is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden; /* للأيفون */
+            border-radius: 12px;
+            background-color: #fefcf5;
+            border: 1px solid #e8e2d2;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background-color: #fcf9ee;
+        }
+
+        .inner-border {
+            border: 1px solid #d4af37;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+
+        .shatr { color: #4a4433; font-size: 16px; width: 100%; line-height: 1.6; }
+        .shatr-1 { text-align: right; padding-right: 15px; }
+        .shatr-2 { text-align: left; padding-left: 15px; font-style: italic; }
+        
+        .divider { width: 40px; height: 1px; background: #d4af37; margin: 8px auto; opacity: 0.5; }
+        .ornament { color: #d4af37; font-size: 18px; }
+        
+        h2 { font-family: 'Aref Ruqaa', serif; color: #d4af37; font-size: 24px; margin: 0; }
+        p { color: #8c846d; font-size: 14px; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="card-container" id="card">
+        <div class="card-face card-front">
+            <div class="inner-border">
+                <div class="ornament">❖</div>
+                <div class="shatr shatr-1">يا فاتِناً بالجَمالِ بَصَري قد مَلَكْ</div>
+                <div class="shatr shatr-2">هل أنتِ من حواءَ وآدمَ أم مَلَكْ؟</div>
+                <div class="divider"></div>
+                <div class="shatr shatr-1">عيني إنْ نَظَرَتْ لِحُسْنِكِ سَبَّحَتْ</div>
+                <div class="shatr shatr-2">سبحانَ من خلقَ الجَمالَ وجَمَّلكْ</div>
+                <div class="ornament">❖</div>
+            </div>
+        </div>
+
+        <div class="card-face card-back">
+            <div class="inner-border">
+                <h2>دمتِ بخير</h2>
+                <div class="divider"></div>
+                <p>إلى من أهدت للجمال معنىً آخر..</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // الكود المختصر جداً للقلب لضمان التوافق
+        var card = document.getElementById('card');
+        card.onclick = function() {
+            card.classList.toggle('is-flipped');
+        };
+    </script>
+
+</body>
+</html>
