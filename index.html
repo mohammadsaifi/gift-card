@@ -25,7 +25,7 @@
             perspective: 2000px;
             font-family: 'Amiri', serif;
             overflow: hidden;
-            touch-action: none; 
+            touch-action: manipulation;
         }
 
         .envelope-container {
@@ -169,17 +169,18 @@
             color: white;
             border: none;
             border-radius: 25px; 
-            padding: 10px 20px;
+            padding: 12px 25px;
             cursor: pointer;
-            z-index: 9999;
+            z-index: 99999; /* رفع القيمة للتأكد من أنها فوق كل شيء */
             opacity: 0;
             transition: all 0.4s var(--curve);
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
             font-family: Arial, sans-serif;
             font-weight: bold;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .reset-btn.visible {
@@ -220,7 +221,7 @@
                     <div class="shatr s2">سبحانَ من خلقَ الجَمالَ وجَمَّلكْ</div>
                 </div>
                 <div class="card-face card-back">
-                    <p class="back-phrase">شكراً لأنكِ ليزا...</p>
+                    <p class="back-phrase">Danke, dass du Lisa bist...</p>
                 </div>
             </div>
         </div>
@@ -230,7 +231,7 @@
     </div>
 
     <button class="reset-btn" id="resetBtn">
-       Close me
+        Close me
     </button>
 
     <script>
@@ -242,22 +243,21 @@
         let isOpen = false;
         let isFlipped = false;
 
-        
+        // دالة الفتح والقلب
         wrapper.addEventListener('click', function(e) {
             if (!isOpen) {
-                
+                // فتح الظرف
                 flap.style.transitionDelay = "0s";
                 wrapper.classList.add('open');
                 wrapper.classList.remove('shake');
                 hint.innerText = "Tap on the card";
                 isOpen = true;
                 
-                
                 setTimeout(() => {
                     resetBtn.classList.add('visible');
                 }, 800);
             } else {
-                
+                // قلب البطاقة
                 isFlipped = !isFlipped;
                 if (isFlipped) {
                     wrapper.classList.add('flipped');
@@ -267,39 +267,35 @@
             }
         });
 
-        // دالة الإغلاق (مصممة لتعمل بدقة على الموبايل)
+        // دالة الإغلاق الموحدة
         function closeAll(e) {
-            e.stopPropagation(); // منع انتقال الضغطة للظرف (أهم جزء)
+            e.preventDefault();
+            e.stopPropagation(); // منع وصول الحدث للعناصر الخلفية
             
-            // 1. إخفاء زر الإغلاق
+            // 1. إخفاء الزر فوراً
+            resetBtn.classList.remove('visible');
             
-            
-            // 2. إعادة البطاقة لوضعها الأصلي إذا كانت مقلوبة
+            // 2. إعادة البطاقة لوجهها الأول
             wrapper.classList.remove('flipped');
             isFlipped = false;
 
-            // 3. إرجاع البطاقة داخل الظرف ثم إغلاق الغطاء
+            // 3. إرجاع البطاقة للداخل وإغلاق الغطاء
             setTimeout(() => {
                 flap.style.transitionDelay = "0.6s";
                 wrapper.classList.remove('open');
                 isOpen = false;
             }, 300);
 
-            // 4. إعادة تفعيل الاهتزاز والنص الأصلي
+            // 4. إعادة الوضع الأصلي
             setTimeout(() => {
                 wrapper.classList.add('shake');
                 hint.innerText = "Open me";
             }, 1200);
         }
 
-        // تفعيل الإغلاق عند الضغط أو اللمس
-        resetBtn.addEventListener('click', closeAll);
-        resetBtn.addEventListener('touchstart', function(e) {
-            e.preventDefault(); // يمنع تكرار الحدث في بعض المتصفحات
-            closeAll(e);
-        }, {passive: false});
+        // استخدام 'pointerdown' لأنه الأسرع والأكثر دقة في جميع المتصفحات الحديثة (كمبيوتر وجوال)
+        resetBtn.addEventListener('pointerdown', closeAll);
     </script>
 
 </body>
 </html>
-
