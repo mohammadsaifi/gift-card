@@ -25,7 +25,7 @@
             perspective: 2000px;
             font-family: 'Amiri', serif;
             overflow: hidden;
-            touch-action: none; /* يمنع التمرير العشوائي أثناء التفاعل */
+            touch-action: none; 
         }
 
         .envelope-container {
@@ -242,22 +242,22 @@
         let isOpen = false;
         let isFlipped = false;
 
-        // دالة التحكم في الظرف
+        
         wrapper.addEventListener('click', function(e) {
             if (!isOpen) {
-                // فتح الظرف
+                
                 flap.style.transitionDelay = "0s";
                 wrapper.classList.add('open');
                 wrapper.classList.remove('shake');
                 hint.innerText = "Tap on the card";
                 isOpen = true;
                 
-                // إظهار زر الإغلاق بعد انتهاء حركة الفتح
+                
                 setTimeout(() => {
                     resetBtn.classList.add('visible');
                 }, 800);
             } else {
-                // قلب البطاقة
+                
                 isFlipped = !isFlipped;
                 if (isFlipped) {
                     wrapper.classList.add('flipped');
@@ -272,7 +272,7 @@
             e.stopPropagation(); // منع انتقال الضغطة للظرف (أهم جزء)
             
             // 1. إخفاء زر الإغلاق
-            resetBtn.classList.remove('visible');
+            
             
             // 2. إعادة البطاقة لوضعها الأصلي إذا كانت مقلوبة
             wrapper.classList.remove('flipped');
@@ -302,3 +302,4 @@
 
 </body>
 </html>
+
