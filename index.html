@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>صندوق الحكمة الذكي - ليزا</title>
+    <title>Das Geschenk für Liza</title>
     <style>
         :root {
             --bg-top: #001f3f;
@@ -208,7 +208,7 @@
     <div class="game-container">
         <div class="top-section">
             <div class="jar-container" id="jar" onclick="startProcess()">🗳️</div>
-            <button class="btn-shake" onclick="startProcess()">هز الصندوق</button>
+            <button class="btn-shake" onclick="startProcess()">Shake the box</button>
         </div>
 
         <div class="bottom-section">
@@ -230,12 +230,12 @@
     <div class="overlay" id="overlay">
         <div class="paper">
             <p id="phrase-display">...</p>
-            <button class="close-btn" onclick="closePaper()">شكراً ليزا</button>
+            <button class="close-btn" onclick="closePaper()">Close</button>
         </div>
     </div>
 
     <script>
-        const phrases = ["لا تحزن، فالله يخبئ لك الأجمل.", "ابتسامتك تجعل العالم مكاناً أفضل.", "كل نهاية هي بداية لشيء أروع.", "أنت شخص متميز، لا تنسَ ذلك أبداً.", "اليوم هو فرصة جديدة لتكون سعيداً."];
+        const phrases = ["كم حدا قلك انك جميله اليوم..انت جميله", "الابتسامه على وجهك احلى من الزعل ...ابتسمي", "على فكرة، ضحكتك بتغير مِزاج اللي حواليك للأفضل، جربيها!", "ربك إذا أغلق باب بفتحلك ألف غيره، بس أنت اصبر وتفاءل.", "اليوم هو فرصة جديدة لتكون سعيدة","Du siehst heute echt super aus","Kopf hoch!","Läuft bei dir!","!Lach mal wieder"];
 
         function updateThemeBasedOnTime() {
             const now = new Date();
@@ -245,11 +245,11 @@
             const bubble = document.getElementById('bubble-text');
             if (hour >= 6 && hour < 18) {
                 if (!body.classList.contains('day-mode')) {
-                    body.classList.add('day-mode'); icon.innerText = "☀️"; bubble.innerText = "صباح الخير يا ليزا! 🌸";
+                    body.classList.add('day-mode'); icon.innerText = "☀️"; bubble.innerText = "Guten Morgen 🌸";
                 }
             } else {
                 if (body.classList.contains('day-mode')) body.classList.remove('day-mode');
-                icon.innerText = "🌙"; bubble.innerText = "رجي الصندوق يا ليزا ✨";
+                icon.innerText = "🌙"; bubble.innerText = "Mohammad tells me to give this box to you✨";
             }
         }
         updateThemeBasedOnTime();
@@ -268,5 +268,6 @@
         function closePaper() { document.getElementById('overlay').classList.remove('active'); }
         document.getElementById('overlay').onclick = function(e) { if (e.target == this) closePaper(); };
     </script>
+    <script async data-id="101499142" src="//static.getclicky.com/js"></script>
 </body>
 </html>
