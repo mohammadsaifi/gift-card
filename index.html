@@ -245,7 +245,7 @@
             const body = document.body;
             const icon = document.getElementById('celestial-icon');
             const bubble = document.getElementById('bubble-text');
-            if (!(hour >= 6 && hour < 18)) {
+            if ((hour >= 6 && hour < 18)) {
                 if (!body.classList.contains('day-mode')) {
                     body.classList.add('day-mode'); icon.innerText = "☀️"; bubble.innerText = "Guten Morgen ☀️\n Mohammad told me to give this box to you🌸";
                 }
@@ -273,3 +273,4 @@
     <script async data-id="101499142" src="//static.getclicky.com/js"></script>
 </body>
 </html>
+
