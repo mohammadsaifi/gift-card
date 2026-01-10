@@ -6,9 +6,9 @@
     <title>Das Geschenk für Liza</title>
     <style>
         :root {
-            --bg-top: #001f3f;
+            --bg-top: #011223;
             --bg-bottom: #003366;
-            --grass-color: #2e7d32; 
+            --grass-color: #298a2e; 
             --house-color: #5d4037; 
             --roof-color: #3e2723;
             --window-color: #ffff00;
@@ -18,10 +18,10 @@
         body.day-mode {
             --bg-top: #00bfff;
             --bg-bottom: #add8e6;
-            --grass-color: #43a047;
+            --grass-color: #298a2e;
             --house-color: #795548;
             --roof-color: #a52a2a;
-            --window-color: #ffffff;
+            --window-color: #add8e6;
             --text-color: #333333;
         }
 
@@ -70,6 +70,7 @@
         .celestial {
             position: absolute; top: 20px; right: 20px; font-size: 40px; z-index: 10;
             filter: drop-shadow(0 0 10px #fdfd96);
+            
         }
 
         /* --- الحاوية الرئيسية --- */
@@ -161,6 +162,7 @@
             top: -15px; left: 40px; width: max-content;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             animation: float 3s ease-in-out infinite;
+            direction: ltr;
         }
 
         .speech-bubble::after {
@@ -208,12 +210,12 @@
     <div class="game-container">
         <div class="top-section">
             <div class="jar-container" id="jar" onclick="startProcess()">🗳️</div>
-            <button class="btn-shake" onclick="startProcess()">Shake the box</button>
+            <button class="btn-shake" onclick="startProcess()">Shake and Win</button>
         </div>
 
         <div class="bottom-section">
             <div class="character">
-                <div class="speech-bubble" id="bubble-text">رجي الصندوق يا ليزا ✨</div>
+                <div class="speech-bubble" id="bubble-text">✨</div>
                 <div class="girl-head">
                     <div class="hair"></div><div class="hair-side left"></div><div class="hair-side right"></div>
                     <div class="eye left"></div><div class="eye right"></div><div class="mouth"></div>
@@ -235,7 +237,7 @@
     </div>
 
     <script>
-        const phrases = ["كم حدا قلك انك جميله اليوم..انت جميله", "الابتسامه على وجهك احلى من الزعل ...ابتسمي", "على فكرة، ضحكتك بتغير مِزاج اللي حواليك للأفضل، جربيها!", "ربك إذا أغلق باب بفتحلك ألف غيره، بس أنت اصبر وتفاءل.", "اليوم هو فرصة جديدة لتكون سعيدة","Du siehst heute echt super aus","Kopf hoch!","Läuft bei dir!","!Lach mal wieder"];
+        const phrases = ["كم حدا قلك انك جميله اليوم..انت جميله", "الابتسامه على وجهك احلى من الزعل ...ابتسمي", "على فكرة، ضحكتك بتغير مِزاج اللي حواليك للأفضل، جربيها!",  "اليوم هو فرصة جديدة لتكوني مبسوطه","Du siehst heute echt super aus","Kopf hoch!","Läuft bei dir!","!Lach mal wieder"];
 
         function updateThemeBasedOnTime() {
             const now = new Date();
@@ -243,13 +245,13 @@
             const body = document.body;
             const icon = document.getElementById('celestial-icon');
             const bubble = document.getElementById('bubble-text');
-            if (hour >= 6 && hour < 18) {
+            if (!(hour >= 6 && hour < 18)) {
                 if (!body.classList.contains('day-mode')) {
-                    body.classList.add('day-mode'); icon.innerText = "☀️"; bubble.innerText = "Guten Morgen 🌸";
+                    body.classList.add('day-mode'); icon.innerText = "☀️"; bubble.innerText = "Guten Morgen ☀️\n Mohammad told me to give this box to you🌸";
                 }
             } else {
                 if (body.classList.contains('day-mode')) body.classList.remove('day-mode');
-                icon.innerText = "🌙"; bubble.innerText = "Mohammad tells me to give this box to you✨";
+                icon.innerText = "🌙"; bubble.innerText = "Guten Abend🌙\nMohammad told me to give this box to you✨";
             }
         }
         updateThemeBasedOnTime();
